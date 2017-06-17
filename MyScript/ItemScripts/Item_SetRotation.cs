@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item_SetPosition : MonoBehaviour {
+public class Item_SetRotation : MonoBehaviour {
 
     private Item_Master itemMaster;
-    public Vector3 itemLocalPosition;
+    public Vector3 itemLocalRotation;
 
     private void OnEnable()
     {
         SetInitialReferences();
-        
-        itemMaster.EventObjectPickup += SetPositionOnPlayer;
+
+        itemMaster.EventObjectPickup += SetRotationOnPlayer;
     }
 
     private void OnDisable()
     {
-        itemMaster.EventObjectPickup -= SetPositionOnPlayer;
+        itemMaster.EventObjectPickup -= SetRotationOnPlayer;
     }
 
     private void Start()
     {
-        SetPositionOnPlayer();
+        SetRotationOnPlayer();
     }
 
     void SetInitialReferences()
@@ -29,10 +29,10 @@ public class Item_SetPosition : MonoBehaviour {
         itemMaster = GetComponent<Item_Master>();
     }
 
-    void SetPositionOnPlayer()
+    void SetRotationOnPlayer()
     {
         if (transform.root.CompareTag(GameManager_References._playerTag)) {
-            transform.localPosition = itemLocalPosition;
+            transform.localEulerAngles = itemLocalRotation;
         }
     }
 }

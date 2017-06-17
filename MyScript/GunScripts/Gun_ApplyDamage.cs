@@ -11,11 +11,13 @@ public class Gun_ApplyDamage : MonoBehaviour {
     {
         SetInitialReferences();
         gunMaster.EventShotEnemy += ApplyDamage;
+        gunMaster.EventShotDefault += ApplyDamage;
     }
 
     private void OnDisable()
     {
         gunMaster.EventShotEnemy -= ApplyDamage;
+        gunMaster.EventShotDefault -= ApplyDamage;
     }
 
     void SetInitialReferences()
@@ -25,8 +27,11 @@ public class Gun_ApplyDamage : MonoBehaviour {
 
     void ApplyDamage(Vector3 hitPosition, Transform hitTransform)
     {
-        if (hitTransform.GetComponent<Enemy_TakeDamage>() != null) {
+        /*if (hitTransform.GetComponent<Enemy_TakeDamage>() != null) {
             hitTransform.GetComponent<Enemy_TakeDamage>().ProcessDamage(damage);
-        }
+        } else if (hitTransform.GetComponent<Destructible_TakeDamage>() != null) {
+            hitTransform.GetComponent<Destructible_TakeDamage>().ProcessDamage(damage);
+        }*/
+        hitTransform.SendMessage("ProcessDamage", damage, SendMessageOptions.DontRequireReceiver);
     }
 }

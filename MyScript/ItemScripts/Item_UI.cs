@@ -11,8 +11,8 @@ public class Item_UI : MonoBehaviour {
     private void OnEnable()
     {
         SetInitialReferences();
-        itemMaster.EventObjectPickup += EnableMyCrosshair;
-        itemMaster.EventObjectThrow += DisableMyCrosshair;
+        itemMaster.EventObjectPickup += EnableMyUI;
+        itemMaster.EventObjectThrow += DisableMyUI;
 
         itemMaster.EventObjectPickup += EnableMyCrosshair;
         itemMaster.EventObjectThrow += DisableMyCrosshair;
@@ -20,8 +20,8 @@ public class Item_UI : MonoBehaviour {
 
     private void OnDisable()
     {
-        itemMaster.EventObjectPickup -= EnableMyCrosshair;
-        itemMaster.EventObjectThrow -= DisableMyCrosshair;
+        itemMaster.EventObjectPickup -= EnableMyUI;
+        itemMaster.EventObjectThrow -= DisableMyUI;
 
         itemMaster.EventObjectPickup -= EnableMyCrosshair;
         itemMaster.EventObjectThrow -= DisableMyCrosshair;

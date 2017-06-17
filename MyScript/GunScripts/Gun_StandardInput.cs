@@ -40,12 +40,12 @@ public class Gun_StandardInput : MonoBehaviour {
             && myTransform.root.CompareTag(GameManager_References._playerTag)) {
             if (isAutomatic && !isBurstFireActive) {
                 if (Input.GetButton(attackButtonName)) {
-                    Debug.Log("Full Auto");
+                    //Debug.Log("Full Auto");
                     AttemptAttack();
                 }
             }else if(isBurstFireActive) {
                 if (Input.GetButtonDown(attackButtonName)) {
-                    Debug.Log("Burst");
+                    //Debug.Log("Burst");
                     StartCoroutine(RunBurstFire());
                 }
             }else if (!isAutomatic) {
@@ -61,7 +61,7 @@ public class Gun_StandardInput : MonoBehaviour {
         nextAttack = Time.time + attackRate;
 
         if (gunMaster.isGunLoaded) {
-            Debug.Log("Shooting");
+            //Debug.Log("Shooting");
             gunMaster.CallEventPlayerInput();
         }else {
             gunMaster.CallEventGunNotUsable();
@@ -80,7 +80,7 @@ public class Gun_StandardInput : MonoBehaviour {
     {
         if (Input.GetButtonDown(burstFireButtonName) && Time.timeScale > 0
             && myTransform.root.CompareTag(GameManager_References._playerTag)) {
-            Debug.Log("Burst Fire Toggled");
+            //Debug.Log("Burst Fire Toggled");
             isBurstFireActive = !isBurstFireActive;
             gunMaster.CallEventToggleBurstFire();
         }
