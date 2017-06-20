@@ -35,13 +35,21 @@ public class GameManager_ToggleMenu : MonoBehaviour {
 
     void CheckForMenuToggleRequest()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !gameManagerMaster.isGameOver
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (!gameManagerMaster.isGameOver
             && !gameManagerMaster.isInventoryUIOn) {
-            ToggleMenu();
+                ToggleMenu();
+            }
+            else {
+                if (!gameManagerMaster.isGameOver
+                && gameManagerMaster.isInventoryUIOn) {
+                    GetComponent<GameManager_ToggleInventoryUI>().ToggleInventoryUI();
+                }
+            }
         }
     }
 
-    void ToggleMenu()
+    public void ToggleMenu()
     {
         if (menu != null) {
             menu.SetActive(!menu.activeSelf);

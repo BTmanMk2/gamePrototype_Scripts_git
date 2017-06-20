@@ -8,6 +8,7 @@ public class Enemy_Master : MonoBehaviour {
     public bool isOnRoute;
     public bool isNavPaused;
 
+    public bool isAlive = true;
 
     public delegate void GeneralEventHandler();
     public event GeneralEventHandler EventEnemyDie;
@@ -26,14 +27,14 @@ public class Enemy_Master : MonoBehaviour {
     public delegate void NavTargetEventHandler(Transform targetTransform);
     public event NavTargetEventHandler EventEnemySetNavTarget;
 
-    public void CallEventEnemyDeductHeealth(float health)
+    public void CallEventEnemyDeductHealth(float health)
     {
         if (EventEnemyDeductHealth != null) {
             EventEnemyDeductHealth(health);
         }
     }
 
-    public void CallEventEnemyIncreaseHeealth(float health)
+    public void CallEventEnemyIncreaseHealth(float health)
     {
         if (EventEnemyIncreaseHealth != null) {
             EventEnemyIncreaseHealth(health);
@@ -54,6 +55,7 @@ public class Enemy_Master : MonoBehaviour {
         if (EventEnemyDie != null) {
             EventEnemyDie();
         }
+        isAlive = false;
     }
 
 

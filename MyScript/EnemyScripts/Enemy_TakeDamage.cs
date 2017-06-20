@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy_TakeDamage : MonoBehaviour {
 
     private Enemy_Master enemyMaster;
-    public int damageMultiplier = 1;
+    public float damageMultiplier = 1;
     public bool shouldRemoveCollider;
 
     private void OnEnable()
@@ -31,8 +31,8 @@ public class Enemy_TakeDamage : MonoBehaviour {
 
     public void ProcessDamage(int damage)
     {
-        int damageToApply = damage * damageMultiplier;
-        enemyMaster.CallEventEnemyDeductHeealth(damageToApply);
+        int damageToApply = (int)(damage * damageMultiplier);
+        enemyMaster.CallEventEnemyDeductHealth(damageToApply);
     }
 
     void RemoveThis()

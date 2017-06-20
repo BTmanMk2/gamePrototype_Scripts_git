@@ -2,41 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item_Ammo : MonoBehaviour {
+public class Item_Health : MonoBehaviour {
 
     private Item_Master itemMaster;
     private GameObject playerGO;
-    public string ammoName;
-    public int quantity;
+    public int healthRecover;
     public bool isTriggerPickup;
 
     private void OnEnable()
     {
         SetInitialReferences();
-        itemMaster.EventObjectPickup += TakeAmmo;
+        itemMaster.EventObjectPickup += RecoverHealth;
     }
 
     private void OnDisable()
     {
-        itemMaster.EventObjectPickup -= TakeAmmo;
+        itemMaster.EventObjectPickup -= RecoverHealth;
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         SetInitialReferences();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(GameManager_References._playerTag) && isTriggerPickup) {
-            TakeAmmo();
+            RecoverHealth();
         }
     }
 
-    void TakeAmmo()
+    void RecoverHealth()
     {
-        playerGO.GetComponent<Player_Master>().CallEventPickUpAmmo(ammoName, quantity);
-        Destroy(gameObject);
+        if (playerGO.GetComponent<Player_Health>().playerHealth < playerGO.GetComponent<Player_Health>().maxHealth) {
+            playerGO.GetComponent<Player_Master>().CallEventPlayerHealthIncrease(healthRecover);
+            Destroy(gameObject);
+        }
+        
     }
 
     void SetInitialReferences()

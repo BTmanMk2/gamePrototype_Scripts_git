@@ -2,41 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item_Ammo : MonoBehaviour {
+public class Item_Armor : MonoBehaviour {
 
     private Item_Master itemMaster;
     private GameObject playerGO;
-    public string ammoName;
-    public int quantity;
+    public int armorRecover;
     public bool isTriggerPickup;
 
     private void OnEnable()
     {
         SetInitialReferences();
-        itemMaster.EventObjectPickup += TakeAmmo;
+        itemMaster.EventObjectPickup += RecoverArmor;
     }
 
     private void OnDisable()
     {
-        itemMaster.EventObjectPickup -= TakeAmmo;
-    }
-
-    // Use this for initialization
-    void Start () {
-        SetInitialReferences();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(GameManager_References._playerTag) && isTriggerPickup) {
-            TakeAmmo();
-        }
-    }
-
-    void TakeAmmo()
-    {
-        playerGO.GetComponent<Player_Master>().CallEventPickUpAmmo(ammoName, quantity);
-        Destroy(gameObject);
+        itemMaster.EventObjectPickup -= RecoverArmor;
     }
 
     void SetInitialReferences()
@@ -51,6 +32,26 @@ public class Item_Ammo : MonoBehaviour {
             if (GetComponent<Rigidbody>() != null) {
                 //GetComponent<Rigidbody>().isKinematic = true;
             }
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
+        SetInitialReferences();
+	}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(GameManager_References._playerTag) && isTriggerPickup) {
+            RecoverArmor();
+        }
+    }
+
+    void RecoverArmor()
+    {
+        if (playerGO.GetComponent<Player_Armor>().playerCurrentArmor < playerGO.GetComponent<Player_Armor>().maxArmor) {
+            playerGO.GetComponent<Player_Master>().CallEventPlayerArmorIncrease(armorRecover);
+            Destroy(gameObject);
         }
     }
 }

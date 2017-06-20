@@ -25,7 +25,7 @@ public class Gun_ApplyForce : MonoBehaviour {
         myTransfrom = transform;
     }
 
-    void ApplyForce(Vector3 hitPosition, Transform hitTransform)
+    void ApplyForce(Vector3 hitPosition, Transform hitTransform, RaycastHit hit)
     {
         if (hitTransform.GetComponent<Rigidbody>() != null) {
             hitTransform.GetComponent<Rigidbody>().AddForce(myTransfrom.forward * forceToApply, ForceMode.Impulse);

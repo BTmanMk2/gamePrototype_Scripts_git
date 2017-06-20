@@ -10,7 +10,8 @@ public class GameManager_Master : MonoBehaviour {
     public event GameManagerEventHandler RestartLevelEvent;
     public event GameManagerEventHandler GotoMenuSceneEvent;
     public event GameManagerEventHandler GameOverEvent;
-    //public event GameManagerEventHandler MenuToggleEvent;
+    public event GameManagerEventHandler ExitEvent;
+    public event GameManagerEventHandler ResumeEvent;
 
     public bool isGameOver;
     public bool isInventoryUIOn;
@@ -53,9 +54,19 @@ public class GameManager_Master : MonoBehaviour {
     }
 
 
+    public void CallEventExit()
+    {
+        if (ExitEvent != null) {
+            ExitEvent();
+        }
+    }
 
-
-
+    public void CallEventResume()
+    {
+        if (ResumeEvent != null) {
+            ResumeEvent();
+        }
+    }
 
 
 }

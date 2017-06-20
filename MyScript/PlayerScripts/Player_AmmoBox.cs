@@ -43,7 +43,7 @@ public class Player_AmmoBox : MonoBehaviour {
     void PickedUpAmmo(string ammoName,int quantity)
     {
         for(int i = 0; i < typesOfAmmunition.Count; i++) {
-            if (typesOfAmmunition[i].ammoName == ammoName) {
+            if (typesOfAmmunition[i].ammoName.Equals(ammoName)) {
                 typesOfAmmunition[i].ammoCurrentCarried += quantity;
                 if (typesOfAmmunition[i].ammoCurrentCarried > typesOfAmmunition[i].ammoMaxQuantity) {
                     typesOfAmmunition[i].ammoCurrentCarried = typesOfAmmunition[i].ammoMaxQuantity;
@@ -53,5 +53,15 @@ public class Player_AmmoBox : MonoBehaviour {
                 break;
             }
         }
+    }
+
+    public int GetCarriedAmmo(string ammoName)
+    {
+        for (int i = 0; i < typesOfAmmunition.Count; i++) {
+            if (typesOfAmmunition[i].ammoName.Equals(ammoName)) {
+                return typesOfAmmunition[i].ammoCurrentCarried;
+            }
+        }
+        return 0;
     }
 }

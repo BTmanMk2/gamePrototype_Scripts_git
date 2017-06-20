@@ -9,7 +9,8 @@ public class Gun_Ammo : MonoBehaviour {
     private Player_AmmoBox ammoBox;
     private Animator myAnimator;
 
-    public GameObject magzine;
+    public GameObject magazine;
+    public GameObject bolt;
 
     public int clipSize;
     public int currentAmmo;
@@ -138,9 +139,17 @@ public class Gun_Ammo : MonoBehaviour {
         CheckAmmoStatus();
         UIAmmoUpdateRequest();
         //reset magzine position
-        magzine.SetActive(true);
-        magzine.transform.localPosition = new Vector3(0, 0, 0);
-        magzine.transform.localRotation = new Quaternion(0, 0, 0, 0);
+        if (gunMaster.magazineTransform != null && magazine!=null) {
+            magazine.SetActive(true);
+            magazine.transform.localPosition = gunMaster.getMagazineLocalPos();
+            magazine.transform.localRotation = gunMaster.getMagazineLocalRot();
+        }
+        if (gunMaster.boltTransform != null && bolt != null) {
+            bolt.transform.localRotation = gunMaster.getBoltLocalRot();
+            bolt.transform.localPosition = gunMaster.getBoltLocalPos();
+            
+        }
+        
         
     }
 

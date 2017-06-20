@@ -10,7 +10,6 @@ public class Enemy_Animation : MonoBehaviour {
     private void OnEnable()
     {
         SetInitialReferences();
-        enemyMaster.EventEnemyDie += DisableAnimator;
         enemyMaster.EventEnemyWalking += SetAnimationToWalk;
         enemyMaster.EventEnemyReachedNavTarget += SetAnimationToIdle;
         enemyMaster.EventEnemyAttack += SetAnimationToAttack;
@@ -19,7 +18,6 @@ public class Enemy_Animation : MonoBehaviour {
 
     private void OnDisable()
     {
-        enemyMaster.EventEnemyDie -= DisableAnimator;
         enemyMaster.EventEnemyWalking -= SetAnimationToWalk;
         enemyMaster.EventEnemyReachedNavTarget -= SetAnimationToIdle;
         enemyMaster.EventEnemyAttack -= SetAnimationToAttack;
@@ -71,10 +69,7 @@ public class Enemy_Animation : MonoBehaviour {
         }
     }
 
-    void DisableAnimator()
-    {
-        if (myAnimator != null) {
-            myAnimator.enabled = false;
-        }
-    }
+    
+
+    
 }

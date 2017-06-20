@@ -26,10 +26,13 @@ public class Item_Master : MonoBehaviour {
     {
         if (EventObjectThrow != null) {
             EventObjectThrow();
-            
+
         }
-        playerMaster.CallEventHandsEmpty();
-        playerMaster.CallEventInventoryChanged();
+        if (playerMaster != null) {
+            playerMaster.CallEventHandsEmpty();
+            playerMaster.CallEventInventoryChanged();
+        }
+        
     }
 
     public void CallEventObjectPickup()

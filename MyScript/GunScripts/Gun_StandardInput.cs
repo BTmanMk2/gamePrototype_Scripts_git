@@ -23,7 +23,9 @@ public class Gun_StandardInput : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         CheckIfWeaponShouldAttack();
-        CheckForBurstFireToggle();
+        if (hasBurstFire) {
+            CheckForBurstFireToggle();
+        }      
         CheckForReloadRequest();
 	}
 

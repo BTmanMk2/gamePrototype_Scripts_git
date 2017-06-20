@@ -26,7 +26,7 @@ public class GameManager_ToggleRestartLevel : MonoBehaviour {
 
     void RestartLevel()
     {
-        SceneManager.LoadScene("TestScene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         //Application.LoadLevel(Application.loadedLevel);
     }
 }

@@ -35,7 +35,7 @@ public class Enemy_CollisionField : MonoBehaviour {
                 rigidbodyStrikingMe.velocity.sqrMagnitude >= speedRequirement * speedRequirement) {
                 damageToApply = (int)(damageFactor * rigidbodyStrikingMe.mass * rigidbodyStrikingMe.velocity.magnitude);
                 //Debug.Log("Damage:" + damageToApply);
-                enemyMaster.CallEventEnemyDeductHeealth(damageToApply);
+                enemyMaster.CallEventEnemyDeductHealth(damageToApply);
             }
         }
     }

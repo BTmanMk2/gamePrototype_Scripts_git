@@ -12,12 +12,12 @@ public class Player_CanvasHurt : MonoBehaviour {
     private void OnEnable()
     {
         SetInitialReferences();
-        playerMaster.EventPlayerHealthDeduction += TurnOnHurtEffent;
+        playerMaster.EventPlayerHealthDeduction += TurnOnHurtEffect;
     }
 
     private void OnDisable()
     {
-        playerMaster.EventPlayerHealthDeduction -= TurnOnHurtEffent;
+        playerMaster.EventPlayerHealthDeduction -= TurnOnHurtEffect;
     }
 
     void SetInitialReferences()
@@ -25,7 +25,7 @@ public class Player_CanvasHurt : MonoBehaviour {
         playerMaster = GetComponent<Player_Master>();
     }
 
-    void TurnOnHurtEffent(int dummy)
+    void TurnOnHurtEffect(int dummy)
     {
         if (hurtCanvas != null) {
             StopAllCoroutines();

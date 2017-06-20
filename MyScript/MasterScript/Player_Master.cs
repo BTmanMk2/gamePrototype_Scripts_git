@@ -16,8 +16,12 @@ public class Player_Master : MonoBehaviour {
     public event PlayerHealthEventHandler EventPlayerHealthDeduction;
     public event PlayerHealthEventHandler EventPlayerHealthIncrease;
 
+    public delegate void PlayerArmorEventHandler(int armorChange);
+    public event PlayerArmorEventHandler EventPlayerArmorDeduction;
+    public event PlayerArmorEventHandler EventPlayerArmorIncrease;
 
-	public void CallEventInventoryChanged()
+
+    public void CallEventInventoryChanged()
     {
         if (EventInventoryChanged != null) {
             EventInventoryChanged();
@@ -56,6 +60,20 @@ public class Player_Master : MonoBehaviour {
     {
         if (EventPlayerHealthIncrease != null) {
             EventPlayerHealthIncrease(increase);
+        }
+    }
+
+    public void CallEventPlayerArmorIncrease(int increase)
+    {
+        if (EventPlayerArmorIncrease != null) {
+            EventPlayerArmorIncrease(increase);
+        }
+    }
+
+    public void CallEventPlayerArmorDeduction(int dmg)
+    {
+        if (EventPlayerArmorDeduction != null) {
+            EventPlayerArmorDeduction(dmg);
         }
     }
 }

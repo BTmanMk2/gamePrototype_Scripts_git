@@ -12,7 +12,7 @@ public class Gun_Master : MonoBehaviour {
     public event GeneralEventHandler EventToggleBurstFire;
     //public event GeneralEventHandler Event
 
-    public delegate void GunHitEventHandler(Vector3 hitPosition, Transform hitTransform);
+    public delegate void GunHitEventHandler(Vector3 hitPosition, Transform hitTransform, RaycastHit hit);
     public event GunHitEventHandler EventShotDefault;
     public event GunHitEventHandler EventShotEnemy;
 
@@ -22,9 +22,57 @@ public class Gun_Master : MonoBehaviour {
     public delegate void GunCrosshairEventHandler(float speed);
     public event GunCrosshairEventHandler EventSpeedCaptured;
 
+    public Transform magazineTransform;
+    public Transform boltTransform;
+
+    private Vector3 startMagTransformLocalPos;
+    private Quaternion startMagTransformLocalRot;
+
+    private Vector3 startBoltTransformLocalPos;
+    private Quaternion startBoltTransformLocalRot;
+
     public bool isGunLoaded;
     public bool isReloading;
 
+    private void OnEnable()
+    {
+        if (magazineTransform != null) {
+            startMagTransformLocalPos = new Vector3(magazineTransform.localPosition.x, magazineTransform.localPosition.y, magazineTransform.localPosition.z);
+            startMagTransformLocalRot = new Quaternion(magazineTransform.localRotation.x,
+                magazineTransform.localRotation.y,
+                magazineTransform.localRotation.z,
+                magazineTransform.localRotation.w);
+        }
+
+        if (boltTransform != null) {
+            startBoltTransformLocalPos = new Vector3(boltTransform.localPosition.x, boltTransform.localPosition.y, boltTransform.localPosition.z);
+            startBoltTransformLocalRot = new Quaternion(boltTransform.localRotation.x,
+                boltTransform.localRotation.y,
+                boltTransform.localRotation.z,
+                boltTransform.localRotation.w);
+        }
+        
+    }
+
+    public Vector3 getMagazineLocalPos()
+    {
+        return startMagTransformLocalPos;
+    }
+
+    public Quaternion getMagazineLocalRot()
+    {
+        return startMagTransformLocalRot;
+    }
+
+    public Vector3 getBoltLocalPos()
+    {
+        return startBoltTransformLocalPos;
+    }
+
+    public Quaternion getBoltLocalRot()
+    {
+        return startBoltTransformLocalRot;
+    }
 
     public void CallEventPlayerInput()
     {
@@ -61,17 +109,17 @@ public class Gun_Master : MonoBehaviour {
         }
     }
 
-    public void CallEventShotDefault(Vector3 hPos, Transform hTransform)
+    public void CallEventShotDefault(Vector3 hPos, Transform hTransform, RaycastHit hit)
     {
         if (EventShotDefault != null) {
-            EventShotDefault(hPos, hTransform);
+            EventShotDefault(hPos, hTransform, hit);
         }
     }
 
-    public void CallEventShotEnemy(Vector3 hPos, Transform hTransform)
+    public void CallEventShotEnemy(Vector3 hPos, Transform hTransform, RaycastHit hit)
     {
         if (EventShotEnemy != null) {
-            EventShotEnemy(hPos, hTransform);
+            EventShotEnemy(hPos, hTransform, hit);
         }
     }
 

@@ -25,7 +25,7 @@ public class Gun_ApplyDamage : MonoBehaviour {
         gunMaster = GetComponent<Gun_Master>();
     }
 
-    void ApplyDamage(Vector3 hitPosition, Transform hitTransform)
+    void ApplyDamage(Vector3 hitPosition, Transform hitTransform, RaycastHit hit)
     {
         /*if (hitTransform.GetComponent<Enemy_TakeDamage>() != null) {
             hitTransform.GetComponent<Enemy_TakeDamage>().ProcessDamage(damage);
